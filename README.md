@@ -19,8 +19,35 @@ We start with some baseline models to compare against. These predict the energy 
 | Tuned ExtraTrees | 767 | 0.631 |
 | Tuned XGBoost | 768 | 0.630 |
 
+We further investigated forest models by including physically motivated features like change in Temperature and power factor of the inverters to account for thermal lag and power loss. We also added the precipitation data into the features. With these enhanced features, we performed a K-fold cross-validation using data spanning 2021 to 2024.
+
+|    XGBRegressor    |                          
+|--------------------|
+| Fold | RMSE | r²   |
+|------|------|------|
+| 1    | 507  | 0.86 |
+| 2    | 555  | 0.83 |
+| 3    | 550  | 0.84 |
+| 4    | 557  | 0.80 |
+| 5    | 549  | 0.83 |
+| Mean | 544  | 0.83 |
+| Std  | 19   | 0.02 |
+
+
+|   XGBRFRegressor   | 
+| ------------------ |
+| Fold | RMSE | r²   |
+|------|------|------|
+| 1    | 685  | 0.74 |
+| 2    | 666  | 0.70 |
+| 3    | 669  | 0.77 |
+| 4    | 658  | 0.78 |
+| 5    | 615  | 0.77 |
+| Mean | 659  | 0.75 |
+| Std  | 24   | 0.03 |
+
 ## Features
-One main feature used is the solar zenith angle, which is a measure of where the sun is in the sky. Working with hourly weather data, other features that seemed helpful in predicitng were clouds, humidity, precipitation, and temperature. Of these, cloud cover provided the most information. Several weather features were also correlated with each other (e.g. higher precipitation leads to higher humidity), and including too many led to diminishing returns on model performance compared to concerns on overfitting or time spent training.
+The most important weather features from SHAP values were $\Delta T$(change in temperature), Cloud type, Temperature and Zenith angle (measuring location of the sun in the sky).  Working with hourly weather data, other features that seemed helpful in predicitng were total cloud cover, humidity and precipitation. Of these, cloud cover provided the most information. Several weather features were also correlated with each other (e.g. higher precipitation leads to higher humidity), and including too many led to diminishing returns on model performance compared to concerns on overfitting or time spent training.
 
 ## Cautions
 Need to filter data to include only when the sun was out to possibly provide power. Predicting 0 energy during the night artificially inflates model performance by predicting obvious safe values of 0.
