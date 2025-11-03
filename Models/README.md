@@ -26,7 +26,7 @@ Different [forest regressions](9068_ForestModels.ipynb) were all hyperparameter 
 
 ##Adding new features to eXtreme gradient boost 
 In [XGBandXGBRF.ipynb](XGBandXGBRF.ipynb) we included features like:
--lag in Temprature to account for the thermal lag of the module.
--power factor of the inverters to account for power loss
+- lag in Temprature to account for the thermal lag of the module.
+- power factor of the inverters to account for power loss
 
 
