@@ -22,7 +22,7 @@ We start with some baseline models to compare against. These predict the energy 
 We further investigated forest models by including physically motivated features like change in Temperature and power factor of the inverters to account for thermal lag and power loss. We also added the precipitation data into the features. With these enhanced features, we performed a K-fold cross-validation using data spanning 2021 to 2024.
 
 ### XGBRegressor                            
-|--------------------|
+
 | Fold | RMSE | r²   |
 |------|------|------|
 | 1    | 507  | 0.86 |
@@ -35,7 +35,7 @@ We further investigated forest models by including physically motivated features
 
 
 ### XGBRFRegressor   
-| ------------------ |
+
 | Fold | RMSE | r²   |
 |------|------|------|
 | 1    | 685  | 0.74 |
