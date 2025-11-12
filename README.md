@@ -19,32 +19,28 @@ We start with some baseline models to compare against. These predict the energy 
 | Tuned ExtraTrees | 767 | 0.631 |
 | Tuned XGBoost | 768 | 0.630 |
 
-We further investigated forest models by including physically motivated features like change in Temperature and power factor of the inverters to account for thermal lag and power loss. We also added the precipitation data into the features. With these enhanced features, we performed a K-fold cross-validation using data spanning 2021 to 2024.
+We further investigated forest models by including physically motivated features like change in Temperature and power factor of the inverters to account for thermal lag and power loss. We also added the precipitation data into the features. With these enhanced features, we performed a TimeSeriesSplit cross-validation using data spanning 2021 to 2024.
 
 ### XGBRegressor                            
 
 | Fold | RMSE | $`R^{2}`$ |
 |------|------|------|
-| 1    | 507  | 0.86 |
-| 2    | 555  | 0.83 |
-| 3    | 550  | 0.84 |
-| 4    | 557  | 0.80 |
-| 5    | 549  | 0.83 |
-| Mean | 544  | 0.83 |
-| Std  | 19   | 0.02 |
+| 1    | 578  | 0.82 |
+| 2    | 508  | 0.86 |
+| 3    | 695  | 0.71 |
+| Mean | 594  | 0.80 |
+| Std  | 77   | 0.06 |
 
 
 ### XGBRFRegressor   
 
 | Fold | RMSE | $`R^{2}`$ |
 |------|------|------|
-| 1    | 685  | 0.74 |
-| 2    | 666  | 0.70 |
-| 3    | 669  | 0.77 |
-| 4    | 658  | 0.78 |
-| 5    | 615  | 0.77 |
-| Mean | 659  | 0.75 |
-| Std  | 24   | 0.03 |
+| 1    | 694  | 0.74 |
+| 2    | 598  | 0.81 |
+| 3    | 815  | 0.60 |
+| Mean | 702  | 0.72 |
+| Std  | 89   | 0.09 |
 
 ## Features
 The most important weather features from SHAP values were $\Delta T$ (change in temperature), cloud type, temperature and zenith angle (measuring location of the sun in the sky).  Working with hourly weather data, other features that seemed helpful in predicitng were total cloud cover, humidity and precipitation. Of these, cloud cover provided the most information. Several weather features were also correlated with each other (e.g. higher precipitation leads to higher humidity), and including too many led to diminishing returns on model performance compared to concerns on overfitting or time spent training.
